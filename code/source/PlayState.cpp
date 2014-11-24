@@ -202,7 +202,7 @@ void PlayState::botWalk()
     {
         if(bot[botLoop].getXspeed() <= 0)
         {
-            bot[botLoop].setAnimation("walk-left");
+            bot[botLoop].setAnimation("walk-right");
             bot[botLoop].play();
             botDirection[botLoop]++;
         }
@@ -229,7 +229,7 @@ void PlayState::botWalk()
     {
         if(bot[botLoop].getXspeed() <= 0)
         {
-            bot[botLoop].setAnimation("walk-right");
+            bot[botLoop].setAnimation("walk-left");
             bot[botLoop].play();
             botDirection[botLoop]++;
         }
@@ -263,29 +263,29 @@ void PlayState::botWalk()
     if (walk[botLoop] >= 1)
     {
         int r = rand() % 8;
-        cout << "RANDOMMMMMMMM: " << r << endl;
+
         //botDirection[botLoop]++;
         botDirection[botLoop] = r;
         walk[botLoop] = 0;
         //1280x736
         if(bot[botLoop].getPosition().y < 34)
         {
-            cout << "VAI BATERRRRRRRR TOPPPPPPPPPPP" << endl;
+
             botDirection[botLoop] = 1;
         }
         else if( bot[botLoop].getPosition().y > 650)
         {
-            cout << "VAI BATERRRRRRRR BOTTTTTT" << endl;
+
             botDirection[botLoop] = 0;
         }
         else if( bot[botLoop].getPosition().x < 34)
         {
-            cout << "VAI BATERRRRRRRR LEFTTTT" << endl;
+
             botDirection[botLoop] = 3;
         }
         else if(bot[botLoop].getPosition().x > 1200)
         {
-            cout << "VAI BATERRRRRRRR RIGHTTTTT" << endl;
+
             botDirection[botLoop] = 2;
         }
     }
