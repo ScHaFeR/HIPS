@@ -191,7 +191,7 @@ void PlayState::botWalk()
         if(bot[botLoop].getXspeed() <= 0)
         {
             bot[botLoop].setAnimation("walk-right");
-            bot[botLoop].play();
+            bot[botLoop].play();botDirection[botLoop]++;
         }
 
         dirbotx[botLoop]  = 1;
@@ -211,14 +211,29 @@ void PlayState::botWalk()
         cout << "RANDOMMMMMMMM: " << r << endl;
         //botDirection[botLoop]++;
         botDirection[botLoop] = r;
-        if(botDirection[botLoop]>3)
-        {
-            botDirection[botLoop]=0;
+
+        //1280x736
+        if(botDirection[botLoop] == 0 && bot[botLoop].getPosition().y < 75){
+            cout << "VAI BATERRRRRRRR TOPPPPPPPPPPP" << endl;
+            botDirection[botLoop] = 1;
+        }
+        if(botDirection[botLoop] == 1 && bot[botLoop].getPosition().y > 650){
+            cout << "VAI BATERRRRRRRR BOTTTTTT" << endl;
+            botDirection[botLoop] = 0;
+        }
+        if(botDirection[botLoop] == 2 && bot[botLoop].getPosition().x < 75){
+            cout << "VAI BATERRRRRRRR LEFTTTT" << endl;
+            botDirection[botLoop] = 3;
+        }
+        if(botDirection[botLoop] == 3 && bot[botLoop].getPosition().x > 1125){
+            cout << "VAI BATERRRRRRRR RIGHTTTTT" << endl;
+            botDirection[botLoop] = 2;
         }
 
         walk[botLoop] = 0;
 
     }
+
     botLoop++;
     if(botLoop >= BOTMAX)
     {
