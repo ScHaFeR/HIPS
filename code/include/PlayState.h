@@ -33,6 +33,7 @@ class PlayState : public cgf::GameState
     void botWalk();
     void VerifyStatues(cgf::Game* game);
     void VerifyPunch(int player,int PunchDirection,cgf::Game* game);
+    void VerifyPunchBot(int player,int PunchDirection,cgf::Game* game);
 
     void handleEvents(cgf::Game* game);
     void update(cgf::Game* game);

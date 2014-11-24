@@ -12,6 +12,8 @@
 #include "Game.h"
 #include "PlayState.h"
 #include "InputManager.h"
+#include <time.h>
+#include <stdlib.h>
 
 
 #include <time.h>
@@ -204,7 +206,11 @@ void PlayState::botWalk()
 
     if (walk[botLoop] >= 1)
     {
-        botDirection[botLoop]++;
+
+        int r = rand() % 4;
+        cout << "RANDOMMMMMMMM: " << r << endl;
+        //botDirection[botLoop]++;
+        botDirection[botLoop] = r;
         if(botDirection[botLoop]>3)
         {
             botDirection[botLoop]=0;
@@ -415,6 +421,114 @@ void PlayState::VerifyPunch(int player,int PunchDirection,cgf::Game* game)
     }
 }
 
+void PlayState::VerifyPunchBot(int player,int PunchDirection,cgf::Game* game)
+{
+    int i =0;
+    for(i = 0; i<BOTMAX; i++)
+    {
+        bool win = false;
+        if (player == 1)
+        {
+            switch(PunchDirection)
+            {
+            case 0:
+                //PUNCH UP
+                if ( (player1.getPosition().x - bot[i].getPosition().x >= -20 && player1.getPosition().x - bot[i].getPosition().x <= 20) &&
+                        (player1.getPosition().y - bot[i].getPosition().y >= -48 && player1.getPosition().y - bot[i].getPosition().y <= 0) &&
+                        win == false)
+                {
+                    win = true;
+                }
+                break;
+            case 1:
+                //PUNCH LEFT
+                if ( (player1.getPosition().x - bot[i].getPosition().x >= -20 && player1.getPosition().x - bot[i].getPosition().x <= 0) &&
+                        (player1.getPosition().y - bot[i].getPosition().y >= -30 && player1.getPosition().y - bot[i].getPosition().y <= 30) &&
+                        win == false)
+                {
+                    win = true;
+                }
+                break;
+            case 2:
+                //PUNCH DOWN
+                if ( (player1.getPosition().x - bot[i].getPosition().x >= -20 && player1.getPosition().x - bot[i].getPosition().x <= 20) &&
+                        (player1.getPosition().y - bot[i].getPosition().y >= -30 && player1.getPosition().y - bot[i].getPosition().y <= 30) &&
+                        win == false)
+                {
+                    win = true;
+                }
+                break;
+            case 3:
+                //PUNCH RIGHT
+                if ( (player1.getPosition().x - bot[i].getPosition().x >= 0 && player1.getPosition().x - bot[i].getPosition().x <= 20) &&
+                        (player1.getPosition().y - bot[i].getPosition().y >= -30 && player1.getPosition().y - bot[i].getPosition().y <= 30) &&
+                        win == false)
+                {
+                    win = true;
+                }
+                break;
+            }
+            if (win == true)
+            {
+                cout << "PLAYER 1 PUNSHED BOT" << i << endl;
+            }
+        }
+        if (player == 2)
+        {
+            switch(PunchDirection)
+            {
+            case 0:
+                //PUNCH UP
+                if ( (bot[i].getPosition().x - player2.getPosition().x >= -20 && bot[i].getPosition().x - player2.getPosition().x <= 20) &&
+                        (bot[i].getPosition().y - player2.getPosition().y >= -48 && bot[i].getPosition().y - player2.getPosition().y <= 0) &&
+                        win == false)
+                {
+                    win = true;
+                }
+                break;
+            case 1:
+                //PUNCH LEFT
+                if ( (bot[i].getPosition().x - player2.getPosition().x >= -20 && bot[i].getPosition().x - player2.getPosition().x <= 0) &&
+                        (bot[i].getPosition().y - player2.getPosition().y >= -30 && bot[i].getPosition().y - player2.getPosition().y <= 30) &&
+                        win == false)
+                {
+                    win = true;
+                }
+                break;
+            case 2:
+                //PUNCH DOWN
+                if ( (bot[i].getPosition().x - player2.getPosition().x >= -20 && bot[i].getPosition().x - player2.getPosition().x <= 20) &&
+                        (bot[i].getPosition().y - player2.getPosition().y >= -30 && bot[i].getPosition().y - player2.getPosition().y <= 30) &&
+                        win == false)
+                {
+                    win = true;
+                }
+                break;
+            case 3:
+                //PUNCH RIGHT
+                if ( (bot[i].getPosition().x - player2.getPosition().x >= 0 && bot[i].getPosition().x - player2.getPosition().x <= 20) &&
+                        (bot[i].getPosition().y - player2.getPosition().y >= -30 && bot[i].getPosition().y - player2.getPosition().y <= 30) &&
+                        win == false)
+                {
+                    win = true;
+                }
+                break;
+            }
+            if (win == true)
+            {
+                bot[i].setVisible(false);
+                cout << "PLAYER 2 PUNSHED BOT: " << i << endl;
+            }
+
+
+        }
+
+    }
+
+}
+
+
+
 void PlayState::cleanup()
 {
     cout << "PlayState Clean Successful" << endl;
@@ -513,18 +627,23 @@ void PlayState::handleEvents(cgf::Game* game)
         case 0:
             player1.setAnimation("punch-up");
             VerifyPunch(1,0,game);
+            VerifyPunchBot(1,0,game);
+
             break;
         case 1:
             player1.setAnimation("punch-left");
             VerifyPunch(1,1,game);
+            VerifyPunchBot(1,1,game);
             break;
         case 2:
             player1.setAnimation("punch-down");
             VerifyPunch(1,2,game);
+            VerifyPunchBot(1,2,game);
             break;
         case 3:
             player1.setAnimation("punch-right");
             VerifyPunch(1,3,game);
+            VerifyPunchBot(1,3,game);
             break;
         }
 
@@ -612,18 +731,22 @@ void PlayState::handleEvents(cgf::Game* game)
         case 0:
             player2.setAnimation("punch-up");
             VerifyPunch(2,0,game);
+            VerifyPunchBot(2,0,game);
             break;
         case 1:
             player2.setAnimation("punch-left");
             VerifyPunch(2,1,game);
+            VerifyPunchBot(2,1,game);
             break;
         case 2:
             player2.setAnimation("punch-down");
             VerifyPunch(2,2,game);
+            VerifyPunchBot(2,2,game);
             break;
         case 3:
             player2.setAnimation("punch-right");
             VerifyPunch(2,3,game);
+            VerifyPunchBot(2,3,game);
             break;
         }
 
