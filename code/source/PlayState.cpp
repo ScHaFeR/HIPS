@@ -191,7 +191,8 @@ void PlayState::botWalk()
         if(bot[botLoop].getXspeed() <= 0)
         {
             bot[botLoop].setAnimation("walk-right");
-            bot[botLoop].play();botDirection[botLoop]++;
+            bot[botLoop].play();
+            botDirection[botLoop]++;
         }
 
         dirbotx[botLoop]  = 1;
@@ -199,40 +200,44 @@ void PlayState::botWalk()
     }
     else
     {
-
+        //pause
+        bot[botLoop].setCurrentFrame(0);
+        bot[botLoop].pause();
     }
-    bot[botLoop].setXspeed(dirbotx[botLoop] *100);
-    bot[botLoop].setYspeed(dirboty[botLoop] *100);
+
 
     if (walk[botLoop] >= 1)
     {
-
         int r = rand() % 4;
         cout << "RANDOMMMMMMMM: " << r << endl;
         //botDirection[botLoop]++;
         botDirection[botLoop] = r;
-
+        walk[botLoop] = 0;
         //1280x736
-        if(botDirection[botLoop] == 0 && bot[botLoop].getPosition().y < 75){
+        if(bot[botLoop].getPosition().y < 34)
+        {
             cout << "VAI BATERRRRRRRR TOPPPPPPPPPPP" << endl;
             botDirection[botLoop] = 1;
         }
-        if(botDirection[botLoop] == 1 && bot[botLoop].getPosition().y > 650){
+        else if( bot[botLoop].getPosition().y > 650)
+        {
             cout << "VAI BATERRRRRRRR BOTTTTTT" << endl;
             botDirection[botLoop] = 0;
         }
-        if(botDirection[botLoop] == 2 && bot[botLoop].getPosition().x < 75){
+        else if( bot[botLoop].getPosition().x < 34)
+        {
             cout << "VAI BATERRRRRRRR LEFTTTT" << endl;
             botDirection[botLoop] = 3;
         }
-        if(botDirection[botLoop] == 3 && bot[botLoop].getPosition().x > 1125){
+        else if(bot[botLoop].getPosition().x > 1200)
+        {
             cout << "VAI BATERRRRRRRR RIGHTTTTT" << endl;
             botDirection[botLoop] = 2;
         }
-
-        walk[botLoop] = 0;
-
     }
+
+    bot[botLoop].setXspeed(dirbotx[botLoop] *100);
+    bot[botLoop].setYspeed(dirboty[botLoop] *100);
 
     botLoop++;
     if(botLoop >= BOTMAX)
@@ -793,11 +798,14 @@ void PlayState::handleEvents(cgf::Game* game)
     if(im->testEvent("quit"))
         game->quit();
 
+
+
     player1.setXspeed(dirx*100);
     player1.setYspeed(diry*100);
 
     player2.setXspeed(dirxPlayer2*100);
     player2.setYspeed(diryPlayer2*100);
+
 
 }
 
