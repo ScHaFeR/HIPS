@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Format:
+name   => name of the animation sequence
+start  => starting frame
+end    => ending frame
+loop   => looping animation (default)
+-->
+<animation name="monkey">
+    <sequence name="walk-down" start="0" end="3" loop="true" />
+    <sequence name="punch-down" start="4" end="4" loop="true" />
+    <sequence name="walk-left"  start="5" end="8" loop="true" />
+    <sequence name="punch-left"  start="9" end="9" loop="true" />
+    <sequence name="walk-right" start="10" end="13" loop="true" />
+    <sequence name="punch-right" start="14" end="14" loop="true" />
+    <sequence name="walk-up"  start="15" end="18" loop="true" />
+    <sequence name="punch-up"  start="19" end="19" loop="true" />
+</animation>
+

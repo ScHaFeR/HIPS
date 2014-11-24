@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="40" height="23" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="Desert" tilewidth="32" tileheight="32">
+  <image source="tmw_desert.png" width="256" height="192"/>
+ </tileset>
+ <objectgroup name="Camada de Objetos 1" width="40" height="23"/>
+ <layer name="Desenhos" width="40" height="23">
+  <data encoding="base64" compression="zlib">
+   eJztzjENAAAIwDC04F8kJjh2dMn+zvTb6Hx8fHx8zfn4+Pj4mvP9+Mod0j5p/Q==
+  </data>
+ </layer>
+ <layer name="Limites" width="40" height="23">
+  <data encoding="base64" compression="zlib">
+   eJzt16ENAAAMw7Di/n/wXpgUsIFYKg9tk/T5vrKPsY+xj7GPsY+xj7GPsY+xj7GPuf5lmw1apgTF
+  </data>
+ </layer>
+</map>
