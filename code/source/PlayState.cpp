@@ -544,7 +544,7 @@ void PlayState::VerifyPunchBot(int player,int PunchDirection,cgf::Game* game)
             }
             if (win == true)
             {
-                cout << "PLAYER 1 PUNSHED BOT" << i << endl;
+                bot[i].setVisible(false);
             }
         }
         if (player == 2)
@@ -591,17 +591,10 @@ void PlayState::VerifyPunchBot(int player,int PunchDirection,cgf::Game* game)
             if (win == true)
             {
                 bot[i].setVisible(false);
-                cout << "PLAYER 2 PUNSHED BOT: " << i << endl;
             }
-
-
         }
-
     }
-
 }
-
-
 
 void PlayState::cleanup()
 {
