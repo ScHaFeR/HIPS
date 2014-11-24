@@ -198,6 +198,60 @@ void PlayState::botWalk()
         dirbotx[botLoop]  = 1;
         walk[botLoop]++;
     }
+    else if(botDirection[botLoop] == 4)
+    {
+        if(bot[botLoop].getXspeed() <= 0)
+        {
+            bot[botLoop].setAnimation("walk-left");
+            bot[botLoop].play();
+            botDirection[botLoop]++;
+        }
+
+        dirbotx[botLoop]  = 1;
+        dirboty[botLoop]  = 1;
+        walk[botLoop]++;
+    }
+    else if(botDirection[botLoop] == 5)
+    {
+        if(bot[botLoop].getXspeed() <= 0)
+        {
+            bot[botLoop].setAnimation("walk-right");
+            bot[botLoop].play();
+            botDirection[botLoop]++;
+        }
+
+        dirbotx[botLoop]  = 1;
+        dirboty[botLoop]  = -1;
+        walk[botLoop]++;
+    }
+
+    else if(botDirection[botLoop] == 6)
+    {
+        if(bot[botLoop].getXspeed() <= 0)
+        {
+            bot[botLoop].setAnimation("walk-right");
+            bot[botLoop].play();
+            botDirection[botLoop]++;
+        }
+
+        dirbotx[botLoop]  = -1;
+        dirboty[botLoop]  = -1;
+        walk[botLoop]++;
+    }
+    else if(botDirection[botLoop] == 7)
+    {
+        if(bot[botLoop].getXspeed() <= 0)
+        {
+            bot[botLoop].setAnimation("walk-left");
+            bot[botLoop].play();
+            botDirection[botLoop]++;
+        }
+
+        dirbotx[botLoop]  = -1;
+        dirboty[botLoop]  = 1;
+        walk[botLoop]++;
+    }
+
     else
     {
         //pause
@@ -208,7 +262,7 @@ void PlayState::botWalk()
 
     if (walk[botLoop] >= 1)
     {
-        int r = rand() % 4;
+        int r = rand() % 8;
         cout << "RANDOMMMMMMMM: " << r << endl;
         //botDirection[botLoop]++;
         botDirection[botLoop] = r;
