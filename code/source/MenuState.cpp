@@ -54,12 +54,12 @@ void MenuState::handleEvents(cgf::Game* game)
         // check the type of the event...
         switch (event.type)
         {
-            // window closed
+        // window closed
         case sf::Event::Closed:
             game->quit();
             break;
 
-            // key pressed
+        // key pressed
         case sf::Event::KeyPressed:
             if(event.key.code == sf::Keyboard::S)
                 game->changeState(PlayState::instance());
@@ -72,7 +72,7 @@ void MenuState::handleEvents(cgf::Game* game)
             //game->changeState(PlayMapPhysics::instance());
             break;
 
-            // we don't process other types of events
+        // we don't process other types of events
         default:
             break;
         }

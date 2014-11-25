@@ -27,7 +27,7 @@ void FinalStateP2::init()
 {
     menuSprite.load("data/img/P2Wins.png"); // load menu state bitmap
 
-    winSoundBuffer.loadFromFile("data/audio/imperial_march.mp3");
+    winSoundBuffer.loadFromFile("data/audio/imperial_march.wav");
     winSound.setBuffer(winSoundBuffer);
     winSound.setAttenuation(0);
 
@@ -64,16 +64,21 @@ void FinalStateP2::handleEvents(cgf::Game* game)
         // check the type of the event...
         switch (event.type)
         {
-            // window closed
+        // window closed
         case sf::Event::Closed:
             game->quit();
             break;
 
-            // key pressed
+        // key pressed
         case sf::Event::KeyPressed:
             if(event.key.code == sf::Keyboard::R)
+            {
+                winSound.stop();
                 game->changeState(PlayState::instance());
-            if(event.key.code == sf::Keyboard::Escape){
+            }
+            if(event.key.code == sf::Keyboard::Escape)
+            {
+                winSound.stop();
                 game->quit();
             }
             //game->changeState(PlayMap::instance());
@@ -83,7 +88,7 @@ void FinalStateP2::handleEvents(cgf::Game* game)
             //game->changeState(PlayMapPhysics::instance());
             break;
 
-            // we don't process other types of events
+        // we don't process other types of events
         default:
             break;
         }

@@ -33,12 +33,12 @@ bool InputManager::testEvent(sf::String name)
 
     // Mouse event?
     if (k.myInputType == MouseInput &&
-        sf::Mouse::isButtonPressed(k.myMouseButton))
-            return true;
+            sf::Mouse::isButtonPressed(k.myMouseButton))
+        return true;
     // Keyboard event
     if (k.myInputType == KeyboardInput &&
-        sf::Keyboard::isKeyPressed(k.myKeyCode))
-            return true;
+            sf::Keyboard::isKeyPressed(k.myKeyCode))
+        return true;
 
     // Binding type doesn't match
     return false;

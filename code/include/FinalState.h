@@ -42,6 +42,8 @@ class FinalState : public cgf::GameState
     static FinalState m_FinalState;
 
     cgf::Sprite menuSprite;
+    sf::SoundBuffer winSoundBuffer;
+    sf::Sound winSound;
 
 };
 

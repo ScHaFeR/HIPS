@@ -146,6 +146,10 @@ void PlayState::init()
     GlobalTime = (int) elapsed1.asSeconds();
     InGameTime = 120;
 
+    punchSoundBuffer.loadFromFile("data/audio/kung_fu_punch.wav");
+    punchSound.setBuffer(punchSoundBuffer);
+    punchSound.setAttenuation(0);
+
     cout << "PlayState Init Successful" << endl;
 }
 
@@ -263,8 +267,6 @@ void PlayState::botWalk()
     if (walk[botLoop] >= 1)
     {
         int r = rand() % 8;
-
-        //botDirection[botLoop]++;
         botDirection[botLoop] = r;
         walk[botLoop] = 0;
         //1280x736
@@ -349,9 +351,6 @@ void PlayState::VerifyStatues(cgf::Game* game)
         cout << "Player 1 Wins!" << endl;
         game->changeState(FinalStateP1::instance());
     }
-
-
-
     if (xP2 >= 304 && xP2 <= 336 && yP2 >= 126 && yP2 <= 174 && statuesPlayer2[0] != 1)
     {
         statuesPlayer2[0] = 1;
@@ -377,7 +376,6 @@ void PlayState::VerifyStatues(cgf::Game* game)
         statuesPlayer2[4] = 1;
         cout << "Player 2 passou pela Estatua 5" << endl;
     }
-
     for (i=0; i <= 4; i++)
     {
         if (statuesPlayer2[i] != 1)
@@ -390,7 +388,6 @@ void PlayState::VerifyStatues(cgf::Game* game)
         cout << "Player 2 Wins!" << endl;
         game->changeState(FinalStateP2::instance());
     }
-
 }
 
 void PlayState::VerifyPunch(int player,int PunchDirection,cgf::Game* game)
@@ -485,12 +482,10 @@ void PlayState::VerifyPunch(int player,int PunchDirection,cgf::Game* game)
             }
             break;
         }
-
         if (win == true)
         {
             cout << " Player 2 Wins!" << endl;
             game->changeState(FinalStateP2::instance());
-
         }
     }
 }
@@ -544,7 +539,8 @@ void PlayState::VerifyPunchBot(int player,int PunchDirection,cgf::Game* game)
             }
             if (win == true)
             {
-                bot[i].setVisible(false);
+                bot[i].setVisible(true);
+                cout << "PLAYER 1 PUNSHED BOT" << i << endl;
             }
         }
         if (player == 2)
@@ -591,6 +587,7 @@ void PlayState::VerifyPunchBot(int player,int PunchDirection,cgf::Game* game)
             if (win == true)
             {
                 bot[i].setVisible(false);
+                cout << "PLAYER 2 PUNSHED BOT: " << i << endl;
             }
         }
     }
@@ -641,11 +638,8 @@ void PlayState::handleEvents(cgf::Game* game)
             player1.play();
         }
         diry = -1;
-
-        //DIRECAO DO SOCO
         direcaoSocoP1 = 0;
     }
-
     if(im->testEvent("left"))
     {
         if(player1.getXspeed() >= 0)
@@ -654,11 +648,8 @@ void PlayState::handleEvents(cgf::Game* game)
             player1.play();
         }
         dirx = -1;
-
-        //DIRECAO DO SOCO
         direcaoSocoP1 = 1;
     }
-
     if(im->testEvent("down"))
     {
         if(player1.getYspeed() <= 0)
@@ -667,11 +658,8 @@ void PlayState::handleEvents(cgf::Game* game)
             player1.play();
         }
         diry = 1;
-
-        //DIRECAO DO SOCO
         direcaoSocoP1 = 2;
     }
-
     if(im->testEvent("right"))
     {
         if(player1.getXspeed() <= 0)
@@ -680,12 +668,8 @@ void PlayState::handleEvents(cgf::Game* game)
             player1.play();
         }
         dirx = 1;
-
-        //DIRECAO DO SOCO
         direcaoSocoP1 = 3;
     }
-
-
     if(im->testEvent("RCtrl"))
     {
         socoPlayer1 = true;
@@ -718,11 +702,8 @@ void PlayState::handleEvents(cgf::Game* game)
         {
             punchSound.play();
         }
-
         player1.play();
     }
-
-
     if(!dirx && !diry && !socoPlayer1) // parado?
     {
         player1.setCurrentFrame(0);
@@ -734,7 +715,6 @@ void PlayState::handleEvents(cgf::Game* game)
         //DIRECIONA SOCO PARA BAIXO
         direcaoSocoP1 = 2;
     }
-
     // Player DOIS
     if(im->testEvent("w"))
     {
@@ -748,7 +728,6 @@ void PlayState::handleEvents(cgf::Game* game)
         //DIRECIONA O SOCO
         direcaoSocoP2 = 0;
     }
-
     if(im->testEvent("a"))
     {
         if(player2.getXspeed() >= 0)
@@ -761,7 +740,6 @@ void PlayState::handleEvents(cgf::Game* game)
         //DIRECAO DO SOCO
         direcaoSocoP2 = 1;
     }
-
     if(im->testEvent("s"))
     {
         if(player2.getYspeed() <= 0)
@@ -770,11 +748,9 @@ void PlayState::handleEvents(cgf::Game* game)
             player2.play();
         }
         diryPlayer2 = 1;
-
         //DIRECAO DO SOCO
         direcaoSocoP2 = 2;
     }
-
     if(im->testEvent("d"))
     {
         if(player2.getXspeed() <= 0)
@@ -787,9 +763,6 @@ void PlayState::handleEvents(cgf::Game* game)
         //DIRECAO DO SOCO
         direcaoSocoP2 = 3;
     }
-
-
-
     if(im->testEvent("e"))
     {
         socoPlayer2 = true;
@@ -816,15 +789,12 @@ void PlayState::handleEvents(cgf::Game* game)
             VerifyPunchBot(2,3,game);
             break;
         }
-
-
         if(punchSound.getStatus() == sf::Sound::Stopped)
         {
             punchSound.play();
         }
         player2.play();
     }
-
     if(!dirxPlayer2 && !diryPlayer2 && !socoPlayer2) // parado?
     {
         player2.setCurrentFrame(0);
@@ -836,16 +806,12 @@ void PlayState::handleEvents(cgf::Game* game)
         //DIRECIONA SOCO PARA BAIXO
         direcaoSocoP2 = 2;
     }
-
     if(im->testEvent("pause"))
     {
         game->pushState(PauseState::instance());
     }
-
     if(im->testEvent("quit"))
         game->quit();
-
-
 
     player1.setXspeed(dirx*100);
     player1.setYspeed(diry*100);
@@ -858,23 +824,20 @@ void PlayState::handleEvents(cgf::Game* game)
 
 void PlayState::update(cgf::Game* game)
 {
-
     screen = game->getScreen();
-
     checkCollision(1, game, &player1); // 3a. camada
     checkCollision(1, game, &player2);
-
     int i=0;
     for(i=0; i<BOTMAX; i++)
     {
-
         checkCollision(1, game, &bot[i]);
     }
     if(firstTime)
     {
-        punchSoundBuffer.loadFromFile("data/audio/kung_fu_punch.wav");
-        punchSound.setBuffer(punchSoundBuffer);
-        punchSound.setAttenuation(0);
+        //punchSoundBuffer.loadFromFile("data/audio/kung_fu_punch.wav");
+        //punchSound.setBuffer(punchSoundBuffer);
+        //punchSound.setAttenuation(0);
+        //punchSound.setVolume(1);
 
         firstTime = false;
     }
@@ -882,20 +845,16 @@ void PlayState::update(cgf::Game* game)
     botWalk();
     VerifyStatues(game);
     centerMapOnPlayer();
-
     //tempo
     sf::Time elapsed1 = clock.getElapsedTime();
     int tempo = (int) elapsed1.asSeconds();
     if(tempo != GlobalTime)
     {
-
         GlobalTime = tempo;
-
         text.setFont(font);
         InGameTime -- ;
         ostringstream aux;
         aux << "Time: " << InGameTime;
-
         text.setString(aux.str());
         text.setPosition(585,0);
         text.setCharacterSize(24); // in pixels, not points!
@@ -906,8 +865,6 @@ void PlayState::update(cgf::Game* game)
             game->changeState(FinalState::instance());
         }
     }
-
-
 }
 
 bool PlayState::checkCollision(uint8_t layer, cgf::Game* game, cgf::Sprite* obj)
@@ -1136,8 +1093,5 @@ void PlayState::draw(cgf::Game* game)
         screen->draw(statue[i]);
     }
     map->Draw(*screen, 1);
-
-
-
     screen->draw(text);
 }

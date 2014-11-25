@@ -51,15 +51,15 @@ void Game::init(const char* title, int width, int height, bool fullscreen)
 
     originalView = screen->getView();
 
-	this->fullscreen = fullscreen;
+    this->fullscreen = fullscreen;
 
-	running = true;
+    running = true;
 
     printAttributes();
 
 //	glewInit();
 
-	cout << "Game Initialised Succesfully" << endl;
+    cout << "Game Initialised Succesfully" << endl;
 }
 
 
@@ -84,7 +84,8 @@ void Game::handleEvents()
 void Game::changeState(GameState* state)
 {
     // cleanup the current state
-    if ( !states.empty() ) {
+    if ( !states.empty() )
+    {
         states.top()->cleanup();
         states.pop();
     }
@@ -96,28 +97,31 @@ void Game::changeState(GameState* state)
 
 void Game::pushState(GameState* state)
 {
-	// pause current state
-	if ( !states.empty() ) {
-		states.top()->pause();
-	}
+    // pause current state
+    if ( !states.empty() )
+    {
+        states.top()->pause();
+    }
 
-	// store and init the new state
-	states.push(state);
-	states.top()->init();
+    // store and init the new state
+    states.push(state);
+    states.top()->init();
 }
 
 void Game::popState()
 {
-	// cleanup the current state
-	if ( !states.empty() ) {
-		states.top()->cleanup();
-		states.pop();
-	}
+    // cleanup the current state
+    if ( !states.empty() )
+    {
+        states.top()->cleanup();
+        states.pop();
+    }
 
-	// resume previous state
-	if ( !states.empty() ) {
-		states.top()->resume();
-	}
+    // resume previous state
+    if ( !states.empty() )
+    {
+        states.top()->resume();
+    }
 }
 
 void Game::update()
@@ -127,12 +131,14 @@ void Game::update()
     currentTime = gameClock.getElapsedTime().asMilliseconds();
     updateIterations = ((currentTime - lastFrameTime) + cyclesLeftOver);
 
-    if (updateIterations > maxCyclesPerFrame * updateInterval) {
+    if (updateIterations > maxCyclesPerFrame * updateInterval)
+    {
         updateIterations = maxCyclesPerFrame * updateInterval;
     }
 
     // int cont = 1;
-    while(updateIterations > updateInterval) {
+    while(updateIterations > updateInterval)
+    {
         updateIterations -= updateInterval;
         //cout << "updating " << cont++ << endl;
         if ( !states.empty() )
@@ -165,9 +171,10 @@ void Game::draw()
 
 void Game::clean()
 {
-    while ( !states.empty() ) {
-		states.top()->cleanup();
-		states.pop();
+    while ( !states.empty() )
+    {
+        states.top()->cleanup();
+        states.pop();
     }
     delete hud;
 }

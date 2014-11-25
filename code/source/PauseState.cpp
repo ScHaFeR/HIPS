@@ -54,20 +54,23 @@ void PauseState::handleEvents(cgf::Game* game)
         // check the type of the event...
         switch (event.type)
         {
-            // window closed
+        // window closed
         case sf::Event::Closed:
             game->quit();
             break;
 
-            // key pressed
+        // key pressed
         case sf::Event::KeyPressed:
-            if(event.key.code == sf::Keyboard::R){
+            if(event.key.code == sf::Keyboard::R)
+            {
                 game->popState();
             }
-            if(event.key.code == sf::Keyboard::T){
+            if(event.key.code == sf::Keyboard::T)
+            {
                 game->changeState(PlayState::instance());
             }
-            if(event.key.code == sf::Keyboard::Escape){
+            if(event.key.code == sf::Keyboard::Escape)
+            {
                 game->quit();
             }
             //game->changeState(PlayMap::instance());
@@ -77,7 +80,7 @@ void PauseState::handleEvents(cgf::Game* game)
             //game->changeState(PlayMapPhysics::instance());
             break;
 
-            // we don't process other types of events
+        // we don't process other types of events
         default:
             break;
         }

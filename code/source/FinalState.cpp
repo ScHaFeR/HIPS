@@ -26,6 +26,16 @@ using namespace std;
 void FinalState::init()
 {
     menuSprite.load("data/img/GameOver.png"); // load menu state bitmap
+
+    winSoundBuffer.loadFromFile("data/audio/imperial_march.wav");
+    winSound.setBuffer(winSoundBuffer);
+    winSound.setAttenuation(0);
+
+    if(winSound.getStatus() == sf::Sound::Stopped)
+    {
+        winSound.play();
+    }
+
     cout << "FinalState Init Successful" << endl;
 }
 
@@ -54,26 +64,26 @@ void FinalState::handleEvents(cgf::Game* game)
         // check the type of the event...
         switch (event.type)
         {
-            // window closed
+        // window closed
         case sf::Event::Closed:
             game->quit();
             break;
 
-            // key pressed
+        // key pressed
         case sf::Event::KeyPressed:
             if(event.key.code == sf::Keyboard::R)
+            {
+                winSound.stop();
                 game->changeState(PlayState::instance());
-            if(event.key.code == sf::Keyboard::Escape){
+            }
+            if(event.key.code == sf::Keyboard::Escape)
+            {
+                winSound.stop();
                 game->quit();
             }
-            //game->changeState(PlayMap::instance());
-            //game->changeState(PlayMapTop::instance());
-            //game->changeState(PlayMapAI::instance());
-            //game->changeState(PlayPhysics::instance());
-            //game->changeState(PlayMapPhysics::instance());
             break;
 
-            // we don't process other types of events
+        // we don't process other types of events
         default:
             break;
         }

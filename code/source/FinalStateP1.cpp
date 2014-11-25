@@ -13,11 +13,7 @@
 #include "InputManager.h"
 #include "FinalStateP1.h"
 #include "PlayState.h"
-//#include "PlayMap.h"
-//#include "PlayMapTop.h"
-//#include "PlayMapAI.h"
-//#include "PlayPhysics.h"
-//#include "PlayMapPhysics.h"
+
 
 FinalStateP1 FinalStateP1::m_FinalStateP1;
 
@@ -27,7 +23,7 @@ void FinalStateP1::init()
 {
     menuSprite.load("data/img/P1Wins.png"); // load menu state bitmap
 
-    winSoundBuffer.loadFromFile("data/audio/imperial_march.mp3");
+    winSoundBuffer.loadFromFile("data/audio/imperial_march.wav");
     winSound.setBuffer(winSoundBuffer);
     winSound.setAttenuation(0);
 
@@ -65,26 +61,24 @@ void FinalStateP1::handleEvents(cgf::Game* game)
         // check the type of the event...
         switch (event.type)
         {
-            // window closed
+        // window closed
         case sf::Event::Closed:
             game->quit();
             break;
 
-            // key pressed
+        // key pressed
         case sf::Event::KeyPressed:
             if(event.key.code == sf::Keyboard::R)
+            {
+                winSound.stop();
                 game->changeState(PlayState::instance());
-            if(event.key.code == sf::Keyboard::Escape){
+            }
+            if(event.key.code == sf::Keyboard::Escape)
+            {
+                winSound.stop();
                 game->quit();
             }
-            //game->changeState(PlayMap::instance());
-            //game->changeState(PlayMapTop::instance());
-            //game->changeState(PlayMapAI::instance());
-            //game->changeState(PlayPhysics::instance());
-            //game->changeState(PlayMapPhysics::instance());
             break;
-
-            // we don't process other types of events
         default:
             break;
         }
@@ -98,7 +92,6 @@ void FinalStateP1::update(cgf::Game* game)
 void FinalStateP1::draw(cgf::Game *game)
 {
     menuSprite.setPosition(0,0);
-//    menuSprite->draw(game->getScreen());
     game->getScreen()->draw(menuSprite);
 }
 

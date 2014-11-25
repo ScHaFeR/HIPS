@@ -62,14 +62,14 @@ bool Sprite::load(char filename[])
 }
 
 bool Sprite::load(char filename[], int w, int h, int hSpace, int vSpace, int xIni, int yIni,
-                 int column, int row, int total)
+                  int column, int row, int total)
 {
     if(!loadMultiImage(filename,w,h,hSpace,vSpace,xIni,yIni,column,row,total))
         return false;
 
     setCurrentFrame(0);
     //setOrigin(w/2, h/2);
-	return true;
+    return true;
 }
 
 bool Sprite::loadXML(char xmlFile[])
@@ -80,7 +80,7 @@ bool Sprite::loadXML(char xmlFile[])
     pugi::xml_parse_result result = doc.load_file(xmlFile);
 
     if ( !result )
-		return false;
+        return false;
 
     // Read texture atlas file name
 
@@ -120,7 +120,7 @@ bool Sprite::loadXML(char xmlFile[])
         rect.top = y1;
         rect.height = h;
         cout << "frame " << setw(3) << frames.size() << ": " << rect.left << "," << rect.top
-            << " - " << rect.width << "x" << rect.height << endl;
+             << " - " << rect.width << "x" << rect.height << endl;
         frames.push_back(rect);
 
         //TODO: get spacing and margin
@@ -270,22 +270,22 @@ Sprite::~Sprite()
 // Especifica quantos pixels o sprite ira se mover em x.
 void Sprite::setXspeed(double xspeed)
 {
-	this->xspeed = xspeed;
+    this->xspeed = xspeed;
 }
 
 // Especifica quantos pixels a sprite ira se mover em y.
 void Sprite::setYspeed(double yspeed)
 {
-	this->yspeed = yspeed;
+    this->yspeed = yspeed;
 }
 
 // Sets the current frame
 void Sprite::setCurrentFrame(int c)
 {
-	if ( c>=0 && c<totalFrames )
-		curframe = c;
-	else
-		curframe = 0;
+    if ( c>=0 && c<totalFrames )
+        curframe = c;
+    else
+        curframe = 0;
     curFrameD = curframe;
 
     //sf::IntRect rect = m_animation->getFrame(m_currentFrame);
@@ -301,7 +301,8 @@ void Sprite::setCurrentFrame(int c)
     float top = static_cast<float>(rect.top);
     float bottom = top + rect.height;
 
-    if(mirror) {
+    if(mirror)
+    {
         float tmp = left;
         left = right;
         right = tmp;
@@ -333,17 +334,17 @@ bool Sprite::setFrameRange(int first, int last)
 // Advance to next frame
 void Sprite::frameForward()
 {
-	curframe++;
-	if (curframe > lastFrame)
-		curframe = firstFrame;
+    curframe++;
+    if (curframe > lastFrame)
+        curframe = firstFrame;
 }
 
 // Go back to previous frame
 void Sprite::frameBack()
 {
-	curframe--;
-	if (curframe < firstFrame)
-		curframe = lastFrame;
+    curframe--;
+    if (curframe < firstFrame)
+        curframe = lastFrame;
 }
 
 // Recebe por parametro o valor que sera usado para especificar o atributo
@@ -351,9 +352,9 @@ void Sprite::frameBack()
 void Sprite::setAnimRate(int fdelay)
 {
     if (fdelay >= 0)
-		framedelay = fdelay;
-	else
-		framedelay = 0;
+        framedelay = fdelay;
+    else
+        framedelay = 0;
 
     // Reset framecount so next draw will work as it should be
     framecount = 0;
@@ -363,17 +364,20 @@ void Sprite::setAnimRate(int fdelay)
 // animacao do sprite.
 void Sprite::update(double deltaTime, bool updatePos)
 {
-    if(updatePos) {
+    if(updatePos)
+    {
         // Move sprite according to its speed and the amount of time that has passed
         sf::Vector2f offset(xspeed/1000 * deltaTime, yspeed/1000 * deltaTime);
         move(offset);
     }
 
-    if(animState == AnimState::PLAYING) {
+    if(animState == AnimState::PLAYING)
+    {
         int lastf = curframe;
         curFrameD += (double)framedelay/1000*deltaTime;
         curframe = (int) curFrameD;
-        if(curframe > lastFrame && looping || firstFrame == lastFrame) {
+        if(curframe > lastFrame && looping || firstFrame == lastFrame)
+        {
             curFrameD = firstFrame;
             curframe = firstFrame;
         }
@@ -416,18 +420,18 @@ bool Sprite::bboxCollision(Sprite& other)
 // Check circle collision between this and other sprite
 bool Sprite::circleCollision(Sprite& other)
 {
-   int radius1 = max(this->spriteW, this->spriteH)/2;
-   int radius2 = max(other.spriteW, other.spriteW)/2;
-   radius1 *= this->getScale().x;
-   radius2 *= other.getScale().y;
-   float px1 = this->getPosition().x;
-   float px2 = other.getPosition().x;
-   float py1 = this->getPosition().y;
-   float py2 = other.getPosition().y;
-   float dist = sqrt(pow(px1 - px2, 2) + pow(py1 - py2, 2));
-   //cout << "Radius: " << radius1 << " and " << radius2 << endl;
-   //cout << "distance: " << dist << endl;
-   return (dist < radius1 + radius2);
+    int radius1 = max(this->spriteW, this->spriteH)/2;
+    int radius2 = max(other.spriteW, other.spriteW)/2;
+    radius1 *= this->getScale().x;
+    radius2 *= other.getScale().y;
+    float px1 = this->getPosition().x;
+    float px2 = other.getPosition().x;
+    float py1 = this->getPosition().y;
+    float py2 = other.getPosition().y;
+    float dist = sqrt(pow(px1 - px2, 2) + pow(py1 - py2, 2));
+    //cout << "Radius: " << radius1 << " and " << radius2 << endl;
+    //cout << "distance: " << dist << endl;
+    return (dist < radius1 + radius2);
 }
 
 void Sprite::draw(sf::RenderTarget& target, sf::RenderStates states) const

@@ -17,19 +17,19 @@ int main(int argc, char **argv)
 {
     cgf::Game game(5,30);
 
-	game.init("Hide in Plain Sight",1280,736,false);
+    game.init("Hide in Plain Sight",1280,736,false);
 
     game.changeState(MenuState::instance());
 
-	while(game.isRunning())
-	{
-		game.handleEvents();
-		game.update();
-		game.draw();
-	}
+    while(game.isRunning())
+    {
+        game.handleEvents();
+        game.update();
+        game.draw();
+    }
 
-	// cleanup the engine
-	game.clean();
+    // cleanup the engine
+    game.clean();
 
     return 0;
 }
