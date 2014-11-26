@@ -147,6 +147,13 @@ void PlayState::init()
     punchSound.setBuffer(punchSoundBuffer);
     punchSound.setAttenuation(0);
 
+
+    dingSoundBuffer.loadFromFile("data/audio/ding_sound_effect.wav");
+    dingSound.setBuffer(dingSoundBuffer);
+    dingSound.setAttenuation(0);
+
+
+
     for(int i=0; i<5; i++)
     {
         statuesPlayer2[i] = 0;
@@ -339,26 +346,46 @@ void PlayState::VerifyStatues(cgf::Game* game)
     {
         statuesPlayer1[0] = 1;
         cout << "Player 1 Touched Statues 1" << endl;
+        if(dingSound.getStatus() == sf::Sound::Stopped)
+        {
+            dingSound.play();
+        }
     }
     if (xP1 >= 944 && xP1 <= 976 && yP1 >= 126 && yP1 <= 174 && statuesPlayer1[1] != 1)
     {
         statuesPlayer1[1] = 1;
         cout << "Player 1 Touched Statues 2" << endl;
+        if(dingSound.getStatus() == sf::Sound::Stopped)
+        {
+            dingSound.play();
+        }
     }
     if (xP1 >= 624 && xP1 <= 656 && yP1 >= 344 && yP1 <= 392 && statuesPlayer1[2] != 1)
     {
         statuesPlayer1[2] = 1;
         cout << "Player 1 Touched Statues 3" << endl;
+        if(dingSound.getStatus() == sf::Sound::Stopped)
+        {
+            dingSound.play();
+        }
     }
     if (xP1 >= 304 && xP1 <= 336 && yP1 >= 494 && yP1 <= 542 && statuesPlayer1[3] != 1)
     {
         statuesPlayer1[3] = 1;
         cout << "Player 1 Touched Statues 4" << endl;
+        if(dingSound.getStatus() == sf::Sound::Stopped)
+        {
+            dingSound.play();
+        }
     }
     if (xP1 >= 944 && xP1 <= 976 && yP1 >= 494 && yP1 <= 542 && statuesPlayer1[4] != 1)
     {
         statuesPlayer1[4] = 1;
         cout << "Player 1 Touched Statues 5" << endl;
+        if(dingSound.getStatus() == sf::Sound::Stopped)
+        {
+            dingSound.play();
+        }
     }
 
     for (i=0; i <= 4; i++)
@@ -377,26 +404,46 @@ void PlayState::VerifyStatues(cgf::Game* game)
     {
         statuesPlayer2[0] = 1;
         cout << "Player 2 Touched Statues 1" << endl;
+        if(dingSound.getStatus() == sf::Sound::Stopped)
+        {
+            dingSound.play();
+        }
     }
     if (xP2 >= 944 && xP2 <= 976 && yP2 >= 126 && yP2 <= 174 && statuesPlayer2[1] != 1)
     {
         statuesPlayer2[1] = 1;
         cout << "Player 2 Touched Statues 2" << endl;
+        if(dingSound.getStatus() == sf::Sound::Stopped)
+        {
+            dingSound.play();
+        }
     }
     if (xP2 >= 624 && xP2 <= 656 && yP2 >= 344 && yP2 <= 392 && statuesPlayer2[2] != 1)
     {
         statuesPlayer2[2] = 1;
         cout << "Player 2 Touched Statues 3" << endl;
+        if(dingSound.getStatus() == sf::Sound::Stopped)
+        {
+            dingSound.play();
+        }
     }
     if (xP2 >= 304 && xP2 <= 336 && yP2 >= 494 && yP2 <= 542 && statuesPlayer2[3] != 1)
     {
         statuesPlayer2[3] = 1;
         cout << "Player 2 Touched Statues 4" << endl;
+        if(dingSound.getStatus() == sf::Sound::Stopped)
+        {
+            dingSound.play();
+        }
     }
     if (xP2 >= 944 && xP2 <= 976 && yP2 >= 494 && yP2 <= 542 && statuesPlayer2[4] != 1)
     {
         statuesPlayer2[4] = 1;
         cout << "Player 2 Touched Statues 5" << endl;
+        if(dingSound.getStatus() == sf::Sound::Stopped)
+        {
+            dingSound.play();
+        }
     }
     for (i=0; i <= 4; i++)
     {

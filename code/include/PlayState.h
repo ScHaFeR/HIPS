@@ -22,7 +22,7 @@
 
 class PlayState : public cgf::GameState
 {
-    public:
+public:
 
     void init();
     void cleanup();
@@ -46,11 +46,11 @@ class PlayState : public cgf::GameState
         return &m_PlayState;
     }
 
-    protected:
+protected:
 
     PlayState() {}
 
-    private:
+private:
 
     static PlayState m_PlayState;
 
@@ -64,6 +64,8 @@ class PlayState : public cgf::GameState
     sf::SoundBuffer punchSoundBuffer;
     sf::Sound punchSound;
 
+    sf::SoundBuffer dingSoundBuffer;
+    sf::Sound dingSound;
 
     int x, y;
     int dirx, diry;

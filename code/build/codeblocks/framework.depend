@@ -10707,7 +10707,7 @@
 
 1416858217 c:\users\everton_schafer\dropbox\faculdade\pucrs\entretenimento digital\hips\code\include\pugixml\pugiconfig.hpp
 
-1417012712 c:\users\everton_schafer\dropbox\faculdade\pucrs\entretenimento digital\hips\code\include\playstate.h
+1417030145 c:\users\everton_schafer\dropbox\faculdade\pucrs\entretenimento digital\hips\code\include\playstate.h
 	"GameState.h"
 	"Sprite.h"
 	"InputManager.h"
@@ -10801,7 +10801,7 @@
 	"PauseState.h"
 	"PlayState.h"
 
-1417025628 source:c:\users\everton_schafer\dropbox\faculdade\pucrs\entretenimento digital\hips\code\source\playstate.cpp
+1417030227 source:c:\users\everton_schafer\dropbox\faculdade\pucrs\entretenimento digital\hips\code\source\playstate.cpp
 	<iostream>
 	<cmath>
 	"Game.h"
