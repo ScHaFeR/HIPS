@@ -10707,7 +10707,7 @@
 
 1416858217 c:\users\everton_schafer\dropbox\faculdade\pucrs\entretenimento digital\hips\code\include\pugixml\pugiconfig.hpp
 
-1416858217 c:\users\everton_schafer\dropbox\faculdade\pucrs\entretenimento digital\hips\code\include\playstate.h
+1417012673 c:\users\everton_schafer\dropbox\faculdade\pucrs\entretenimento digital\hips\code\include\playstate.h
 	"GameState.h"
 	"Sprite.h"
 	"InputManager.h"
@@ -10751,21 +10751,21 @@
 	"GameState.h"
 	"Sprite.h"
 
-1416880324 source:c:\users\everton_schafer\dropbox\faculdade\pucrs\entretenimento digital\hips\code\source\finalstatep1.cpp
+1417006607 source:c:\users\everton_schafer\dropbox\faculdade\pucrs\entretenimento digital\hips\code\source\finalstatep1.cpp
 	<iostream>
 	"Game.h"
 	"InputManager.h"
 	"FinalStateP1.h"
 	"PlayState.h"
 
-1416880604 source:c:\users\everton_schafer\dropbox\faculdade\pucrs\entretenimento digital\hips\code\source\finalstatep2.cpp
+1416881013 source:c:\users\everton_schafer\dropbox\faculdade\pucrs\entretenimento digital\hips\code\source\finalstatep2.cpp
 	<iostream>
 	"Game.h"
 	"InputManager.h"
 	"FinalStateP2.h"
 	"PlayState.h"
 
-1416880556 source:c:\users\everton_schafer\dropbox\faculdade\pucrs\entretenimento digital\hips\code\source\game.cpp
+1416923832 source:c:\users\everton_schafer\dropbox\faculdade\pucrs\entretenimento digital\hips\code\source\game.cpp
 	"Game.h"
 	"GameState.h"
 	<iostream>
@@ -10801,14 +10801,12 @@
 	"PauseState.h"
 	"PlayState.h"
 
-1416880806 source:c:\users\everton_schafer\dropbox\faculdade\pucrs\entretenimento digital\hips\code\source\playstate.cpp
+1417012647 source:c:\users\everton_schafer\dropbox\faculdade\pucrs\entretenimento digital\hips\code\source\playstate.cpp
 	<iostream>
 	<cmath>
 	"Game.h"
 	"PlayState.h"
 	"InputManager.h"
-	<time.h>
-	<stdlib.h>
 	<time.h>
 	<stdlib.h>
 

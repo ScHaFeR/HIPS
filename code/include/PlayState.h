@@ -18,7 +18,7 @@
 #include "FinalStateP1.h"
 #include "FinalStateP2.h"
 #include "PauseState.h"
-#define BOTMAX 49
+#define BOTMAX 60
 
 class PlayState : public cgf::GameState
 {
@@ -38,6 +38,7 @@ class PlayState : public cgf::GameState
     void handleEvents(cgf::Game* game);
     void update(cgf::Game* game);
     void draw(cgf::Game* game);
+    void doPunch(cgf::Game* game,int player);
 
     // Implement Singleton Pattern
     static PlayState* instance()

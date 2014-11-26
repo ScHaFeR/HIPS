@@ -37,6 +37,8 @@ Game::Game(int minFrameRate, int maxFrameRate)
         exit(EXIT_FAILURE);
     }
 
+
+
     showStats = false;
     hud = new ClockHUD(clock, font);
     clock.setSampleDepth(100); // Sample 100 frames for averaging.

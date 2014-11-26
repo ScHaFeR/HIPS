@@ -81,11 +81,6 @@ void FinalStateP2::handleEvents(cgf::Game* game)
                 winSound.stop();
                 game->quit();
             }
-            //game->changeState(PlayMap::instance());
-            //game->changeState(PlayMapTop::instance());
-            //game->changeState(PlayMapAI::instance());
-            //game->changeState(PlayPhysics::instance());
-            //game->changeState(PlayMapPhysics::instance());
             break;
 
         // we don't process other types of events

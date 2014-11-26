@@ -16,9 +16,6 @@
 #include <stdlib.h>
 
 
-#include <time.h>
-#include <stdlib.h>
-
 PlayState PlayState::m_PlayState;
 
 using namespace std;
@@ -150,6 +147,23 @@ void PlayState::init()
     punchSound.setBuffer(punchSoundBuffer);
     punchSound.setAttenuation(0);
 
+    if (sf::Joystick::isConnected(0))
+    {
+        cout << "Joystick 1 Connected"<<endl;
+    }
+    else
+    {
+        cout << "Joystick 1 Disconnected | It will be used the Keyboard"<<endl;
+    }
+
+    if (sf::Joystick::isConnected(1))
+    {
+        cout << "Joystick 2 Connected"<<endl;
+    }
+    else
+    {
+        cout << "Joystick 2 Disconnected | It will be used the Keyboard"<<endl;
+    }
     cout << "PlayState Init Successful" << endl;
 }
 
@@ -261,26 +275,27 @@ void PlayState::botWalk()
         //pause
         bot[botLoop].setCurrentFrame(0);
         bot[botLoop].pause();
+        walk[botLoop]++;
     }
 
 
     if (walk[botLoop] >= 1)
     {
-        int r = rand() % 8;
+        int r = rand() % 9;
         botDirection[botLoop] = r;
         walk[botLoop] = 0;
         //1280x736
-        if(bot[botLoop].getPosition().y < 34)
+        if(bot[botLoop].getPosition().y < 134)
         {
 
             botDirection[botLoop] = 1;
         }
-        else if( bot[botLoop].getPosition().y > 650)
+        else if( bot[botLoop].getPosition().y > 550)
         {
 
             botDirection[botLoop] = 0;
         }
-        else if( bot[botLoop].getPosition().x < 34)
+        else if( bot[botLoop].getPosition().x < 134)
         {
 
             botDirection[botLoop] = 3;
@@ -630,6 +645,106 @@ void PlayState::handleEvents(cgf::Game* game)
     dirx = diry = 0;
     dirxPlayer2 = diryPlayer2 = 0;
 
+    /*
+        CONTROLES
+    */
+
+    /* CONTROLE 1*/
+    //down
+    if(sf::Joystick::getAxisPosition(0, sf::Joystick::Y) == 100)
+    {
+        if(player1.getYspeed() <= 0)
+        {
+            player1.setAnimation("walk-down");
+            player1.play();
+        }
+        diry = 1;
+        direcaoSocoP1 = 2;
+    }
+    // up
+    if(sf::Joystick::getAxisPosition(0, sf::Joystick::Y) == -100)
+    {
+        if(player1.getYspeed() >= 0)
+        {
+            player1.setAnimation("walk-up");
+            player1.play();
+        }
+        diry = -1;
+        direcaoSocoP1 = 0;
+    }
+    //right
+    if(sf::Joystick::getAxisPosition(0, sf::Joystick::X) == 100)
+    {
+        if(player1.getXspeed() <= 0)
+        {
+            player1.setAnimation("walk-right");
+            player1.play();
+        }
+        dirx = 1;
+        direcaoSocoP1 = 3;
+    }
+    //left
+    if(sf::Joystick::getAxisPosition(0, sf::Joystick::X) == -100)
+    {
+        if(player1.getXspeed() >= 0)
+        {
+            player1.setAnimation("walk-left");
+            player1.play();
+        }
+        dirx = -1;
+        direcaoSocoP1 = 1;
+    }
+
+    /*CONTROLE 2*/
+    if(sf::Joystick::getAxisPosition(1, sf::Joystick::Y) == 100)
+    {
+        if(player2.getYspeed() <= 0)
+        {
+            player2.setAnimation("walk-down");
+            player2.play();
+        }
+        diryPlayer2 = 1;
+        direcaoSocoP2 = 2;
+    }
+    // up
+    if(sf::Joystick::getAxisPosition(1, sf::Joystick::Y) == -100)
+    {
+        if(player2.getYspeed() >= 0)
+        {
+            player2.setAnimation("walk-up");
+            player2.play();
+        }
+        diryPlayer2 = -1;
+        direcaoSocoP2 = 0;
+    }
+    //right
+    if(sf::Joystick::getAxisPosition(1, sf::Joystick::X) == 100)
+    {
+        if(player2.getXspeed() <= 0)
+        {
+            player2.setAnimation("walk-right");
+            player2.play();
+        }
+        dirxPlayer2 = 1;
+        direcaoSocoP2 = 3;
+    }
+    //left
+    if(sf::Joystick::getAxisPosition(1, sf::Joystick::X) == -100)
+    {
+        if(player2.getXspeed() >= 0)
+        {
+            player2.setAnimation("walk-left");
+            player2.play();
+        }
+        dirxPlayer2 = -1;
+        direcaoSocoP2 = 1;
+    }
+
+
+
+    /*
+        TECLADO
+    */
     if(im->testEvent("up"))
     {
         if(player1.getYspeed() >= 0)
@@ -670,29 +785,33 @@ void PlayState::handleEvents(cgf::Game* game)
         dirx = 1;
         direcaoSocoP1 = 3;
     }
-    if(im->testEvent("RCtrl"))
+    if(im->testEvent("RCtrl") || sf::Joystick::isButtonPressed(0, sf::Joystick::Z) == 1)
     {
         socoPlayer1 = true;
         switch(direcaoSocoP1)
         {
         case 0:
             player1.setAnimation("punch-up");
+            player1.play();
             VerifyPunch(1,0,game);
             VerifyPunchBot(1,0,game);
 
             break;
         case 1:
             player1.setAnimation("punch-left");
+            player1.play();
             VerifyPunch(1,1,game);
             VerifyPunchBot(1,1,game);
             break;
         case 2:
             player1.setAnimation("punch-down");
+            player1.play();
             VerifyPunch(1,2,game);
             VerifyPunchBot(1,2,game);
             break;
         case 3:
             player1.setAnimation("punch-right");
+            player1.play();
             VerifyPunch(1,3,game);
             VerifyPunchBot(1,3,game);
             break;
@@ -704,6 +823,9 @@ void PlayState::handleEvents(cgf::Game* game)
         }
         player1.play();
     }
+
+
+
     if(!dirx && !diry && !socoPlayer1) // parado?
     {
         player1.setCurrentFrame(0);
@@ -715,6 +837,8 @@ void PlayState::handleEvents(cgf::Game* game)
         //DIRECIONA SOCO PARA BAIXO
         direcaoSocoP1 = 2;
     }
+
+
     // Player DOIS
     if(im->testEvent("w"))
     {
@@ -763,28 +887,32 @@ void PlayState::handleEvents(cgf::Game* game)
         //DIRECAO DO SOCO
         direcaoSocoP2 = 3;
     }
-    if(im->testEvent("e"))
+    if(im->testEvent("e") || sf::Joystick::isButtonPressed(1, sf::Joystick::Z) == 1)
     {
         socoPlayer2 = true;
         switch(direcaoSocoP2)
         {
         case 0:
             player2.setAnimation("punch-up");
+            player2.play();
             VerifyPunch(2,0,game);
             VerifyPunchBot(2,0,game);
             break;
         case 1:
             player2.setAnimation("punch-left");
+            player2.play();
             VerifyPunch(2,1,game);
             VerifyPunchBot(2,1,game);
             break;
         case 2:
             player2.setAnimation("punch-down");
+            player2.play();
             VerifyPunch(2,2,game);
             VerifyPunchBot(2,2,game);
             break;
         case 3:
             player2.setAnimation("punch-right");
+            player2.play();
             VerifyPunch(2,3,game);
             VerifyPunchBot(2,3,game);
             break;
@@ -795,6 +923,7 @@ void PlayState::handleEvents(cgf::Game* game)
         }
         player2.play();
     }
+
     if(!dirxPlayer2 && !diryPlayer2 && !socoPlayer2) // parado?
     {
         player2.setCurrentFrame(0);
@@ -815,11 +944,8 @@ void PlayState::handleEvents(cgf::Game* game)
 
     player1.setXspeed(dirx*100);
     player1.setYspeed(diry*100);
-
     player2.setXspeed(dirxPlayer2*100);
     player2.setYspeed(diryPlayer2*100);
-
-
 }
 
 void PlayState::update(cgf::Game* game)
@@ -834,11 +960,6 @@ void PlayState::update(cgf::Game* game)
     }
     if(firstTime)
     {
-        //punchSoundBuffer.loadFromFile("data/audio/kung_fu_punch.wav");
-        //punchSound.setBuffer(punchSoundBuffer);
-        //punchSound.setAttenuation(0);
-        //punchSound.setVolume(1);
-
         firstTime = false;
     }
 
