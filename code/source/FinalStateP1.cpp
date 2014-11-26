@@ -31,7 +31,6 @@ void FinalStateP1::init()
     {
         winSound.play();
     }
-
     cout << "FinalStateP1 Init Successful" << endl;
 
 }
@@ -87,6 +86,10 @@ void FinalStateP1::handleEvents(cgf::Game* game)
 
 void FinalStateP1::update(cgf::Game* game)
 {
+    if(winSound.getStatus() == sf::Sound::Stopped)
+    {
+        winSound.play();
+    }
 }
 
 void FinalStateP1::draw(cgf::Game *game)

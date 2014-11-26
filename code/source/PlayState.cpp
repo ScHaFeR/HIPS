@@ -105,9 +105,9 @@ void PlayState::init()
     int z = 0;
     for (z = 0; z <= BOTMAX ; z ++)
     {
-        dirbotx[z] = 0;
-        dirboty[z] = 0;
-        botDirection[z] = 0;
+        dirbotx[z]  = rand() % 2;;
+        dirboty[z]  = rand() % 2;;
+        botDirection[z]  = rand() % 9;;
         walk[z] = 0;
     }
 
@@ -146,6 +146,13 @@ void PlayState::init()
     punchSoundBuffer.loadFromFile("data/audio/kung_fu_punch.wav");
     punchSound.setBuffer(punchSoundBuffer);
     punchSound.setAttenuation(0);
+
+    for(int i=0; i<5; i++)
+    {
+        statuesPlayer2[i] = 0;
+        statuesPlayer1[i] = 0;
+
+    }
 
     if (sf::Joystick::isConnected(0))
     {
@@ -331,27 +338,27 @@ void PlayState::VerifyStatues(cgf::Game* game)
     if (xP1 >= 304 && xP1 <= 336 && yP1 >= 126 && yP1 <= 174 && statuesPlayer1[0] != 1)
     {
         statuesPlayer1[0] = 1;
-        cout << "Player 1 passou pela Estatua 1" << endl;
+        cout << "Player 1 Touched Statues 1" << endl;
     }
     if (xP1 >= 944 && xP1 <= 976 && yP1 >= 126 && yP1 <= 174 && statuesPlayer1[1] != 1)
     {
         statuesPlayer1[1] = 1;
-        cout << "Player 1 passou pela Estatua 2" << endl;
+        cout << "Player 1 Touched Statues 2" << endl;
     }
     if (xP1 >= 624 && xP1 <= 656 && yP1 >= 344 && yP1 <= 392 && statuesPlayer1[2] != 1)
     {
         statuesPlayer1[2] = 1;
-        cout << "Player 1 passou pela Estatua 3" << endl;
+        cout << "Player 1 Touched Statues 3" << endl;
     }
     if (xP1 >= 304 && xP1 <= 336 && yP1 >= 494 && yP1 <= 542 && statuesPlayer1[3] != 1)
     {
         statuesPlayer1[3] = 1;
-        cout << "Player 1 passou pela Estatua 4" << endl;
+        cout << "Player 1 Touched Statues 4" << endl;
     }
     if (xP1 >= 944 && xP1 <= 976 && yP1 >= 494 && yP1 <= 542 && statuesPlayer1[4] != 1)
     {
         statuesPlayer1[4] = 1;
-        cout << "Player 1 passou pela Estatua 5" << endl;
+        cout << "Player 1 Touched Statues 5" << endl;
     }
 
     for (i=0; i <= 4; i++)
@@ -369,27 +376,27 @@ void PlayState::VerifyStatues(cgf::Game* game)
     if (xP2 >= 304 && xP2 <= 336 && yP2 >= 126 && yP2 <= 174 && statuesPlayer2[0] != 1)
     {
         statuesPlayer2[0] = 1;
-        cout << "Player 2 passou pela Estatua 1" << endl;
+        cout << "Player 2 Touched Statues 1" << endl;
     }
     if (xP2 >= 944 && xP2 <= 976 && yP2 >= 126 && yP2 <= 174 && statuesPlayer2[1] != 1)
     {
         statuesPlayer2[1] = 1;
-        cout << "Player 2 passou pela Estatua 2" << endl;
+        cout << "Player 2 Touched Statues 2" << endl;
     }
     if (xP2 >= 624 && xP2 <= 656 && yP2 >= 344 && yP2 <= 392 && statuesPlayer2[2] != 1)
     {
         statuesPlayer2[2] = 1;
-        cout << "Player 2 passou pela Estatua 3" << endl;
+        cout << "Player 2 Touched Statues 3" << endl;
     }
     if (xP2 >= 304 && xP2 <= 336 && yP2 >= 494 && yP2 <= 542 && statuesPlayer2[3] != 1)
     {
         statuesPlayer2[3] = 1;
-        cout << "Player 2 passou pela Estatua 4" << endl;
+        cout << "Player 2 Touched Statues 4" << endl;
     }
     if (xP2 >= 944 && xP2 <= 976 && yP2 >= 494 && yP2 <= 542 && statuesPlayer2[4] != 1)
     {
         statuesPlayer2[4] = 1;
-        cout << "Player 2 passou pela Estatua 5" << endl;
+        cout << "Player 2 Touched Statues 5" << endl;
     }
     for (i=0; i <= 4; i++)
     {
@@ -555,7 +562,7 @@ void PlayState::VerifyPunchBot(int player,int PunchDirection,cgf::Game* game)
             if (win == true)
             {
                 bot[i].setVisible(true);
-                cout << "PLAYER 1 PUNSHED BOT" << i << endl;
+                // cout << "PLAYER 1 PUNSHED BOT" << i << endl;
             }
         }
         if (player == 2)
@@ -602,7 +609,7 @@ void PlayState::VerifyPunchBot(int player,int PunchDirection,cgf::Game* game)
             if (win == true)
             {
                 bot[i].setVisible(false);
-                cout << "PLAYER 2 PUNSHED BOT: " << i << endl;
+                //  cout << "PLAYER 2 PUNSHED BOT: " << i << endl;
             }
         }
     }
@@ -650,7 +657,6 @@ void PlayState::handleEvents(cgf::Game* game)
     */
 
     /* CONTROLE 1*/
-    //down
     if(sf::Joystick::getAxisPosition(0, sf::Joystick::Y) == 100)
     {
         if(player1.getYspeed() <= 0)
@@ -661,7 +667,6 @@ void PlayState::handleEvents(cgf::Game* game)
         diry = 1;
         direcaoSocoP1 = 2;
     }
-    // up
     if(sf::Joystick::getAxisPosition(0, sf::Joystick::Y) == -100)
     {
         if(player1.getYspeed() >= 0)
@@ -672,7 +677,6 @@ void PlayState::handleEvents(cgf::Game* game)
         diry = -1;
         direcaoSocoP1 = 0;
     }
-    //right
     if(sf::Joystick::getAxisPosition(0, sf::Joystick::X) == 100)
     {
         if(player1.getXspeed() <= 0)
@@ -683,7 +687,6 @@ void PlayState::handleEvents(cgf::Game* game)
         dirx = 1;
         direcaoSocoP1 = 3;
     }
-    //left
     if(sf::Joystick::getAxisPosition(0, sf::Joystick::X) == -100)
     {
         if(player1.getXspeed() >= 0)
@@ -706,7 +709,6 @@ void PlayState::handleEvents(cgf::Game* game)
         diryPlayer2 = 1;
         direcaoSocoP2 = 2;
     }
-    // up
     if(sf::Joystick::getAxisPosition(1, sf::Joystick::Y) == -100)
     {
         if(player2.getYspeed() >= 0)
@@ -717,7 +719,6 @@ void PlayState::handleEvents(cgf::Game* game)
         diryPlayer2 = -1;
         direcaoSocoP2 = 0;
     }
-    //right
     if(sf::Joystick::getAxisPosition(1, sf::Joystick::X) == 100)
     {
         if(player2.getXspeed() <= 0)
@@ -728,7 +729,6 @@ void PlayState::handleEvents(cgf::Game* game)
         dirxPlayer2 = 1;
         direcaoSocoP2 = 3;
     }
-    //left
     if(sf::Joystick::getAxisPosition(1, sf::Joystick::X) == -100)
     {
         if(player2.getXspeed() >= 0)
@@ -739,9 +739,6 @@ void PlayState::handleEvents(cgf::Game* game)
         dirxPlayer2 = -1;
         direcaoSocoP2 = 1;
     }
-
-
-
     /*
         TECLADO
     */
@@ -816,29 +813,19 @@ void PlayState::handleEvents(cgf::Game* game)
             VerifyPunchBot(1,3,game);
             break;
         }
-
         if(punchSound.getStatus() == sf::Sound::Stopped)
         {
             punchSound.play();
         }
         player1.play();
     }
-
-
-
     if(!dirx && !diry && !socoPlayer1) // parado?
     {
         player1.setCurrentFrame(0);
         player1.pause();
-
-        //PARA O SOCO
         socoPlayer1 = false;
-
-        //DIRECIONA SOCO PARA BAIXO
         direcaoSocoP1 = 2;
     }
-
-
     // Player DOIS
     if(im->testEvent("w"))
     {
@@ -848,7 +835,6 @@ void PlayState::handleEvents(cgf::Game* game)
             player2.play();
         }
         diryPlayer2 = -1;
-
         //DIRECIONA O SOCO
         direcaoSocoP2 = 0;
     }
@@ -860,8 +846,6 @@ void PlayState::handleEvents(cgf::Game* game)
             player2.play();
         }
         dirxPlayer2 = -1;
-
-        //DIRECAO DO SOCO
         direcaoSocoP2 = 1;
     }
     if(im->testEvent("s"))
@@ -872,7 +856,6 @@ void PlayState::handleEvents(cgf::Game* game)
             player2.play();
         }
         diryPlayer2 = 1;
-        //DIRECAO DO SOCO
         direcaoSocoP2 = 2;
     }
     if(im->testEvent("d"))
@@ -883,8 +866,6 @@ void PlayState::handleEvents(cgf::Game* game)
             player2.play();
         }
         dirxPlayer2 = 1;
-
-        //DIRECAO DO SOCO
         direcaoSocoP2 = 3;
     }
     if(im->testEvent("e") || sf::Joystick::isButtonPressed(1, sf::Joystick::Z) == 1)
@@ -928,11 +909,7 @@ void PlayState::handleEvents(cgf::Game* game)
     {
         player2.setCurrentFrame(0);
         player2.pause();
-
-        //PARA O SOCO
         socoPlayer2 = false;
-
-        //DIRECIONA SOCO PARA BAIXO
         direcaoSocoP2 = 2;
     }
     if(im->testEvent("pause"))
@@ -940,8 +917,9 @@ void PlayState::handleEvents(cgf::Game* game)
         game->pushState(PauseState::instance());
     }
     if(im->testEvent("quit"))
+    {
         game->quit();
-
+    }
     player1.setXspeed(dirx*100);
     player1.setYspeed(diry*100);
     player2.setXspeed(dirxPlayer2*100);
@@ -951,7 +929,7 @@ void PlayState::handleEvents(cgf::Game* game)
 void PlayState::update(cgf::Game* game)
 {
     screen = game->getScreen();
-    checkCollision(1, game, &player1); // 3a. camada
+    checkCollision(1, game, &player1);
     checkCollision(1, game, &player2);
     int i=0;
     for(i=0; i<BOTMAX; i++)
@@ -978,7 +956,7 @@ void PlayState::update(cgf::Game* game)
         aux << "Time: " << InGameTime;
         text.setString(aux.str());
         text.setPosition(585,0);
-        text.setCharacterSize(24); // in pixels, not points!
+        text.setCharacterSize(24);
         text.setColor(sf::Color::Red);
         text.setStyle(sf::Text::Bold | sf::Text::Underlined);
         if(InGameTime <= 0)
