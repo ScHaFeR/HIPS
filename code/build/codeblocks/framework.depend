@@ -10801,7 +10801,7 @@
 	"PauseState.h"
 	"PlayState.h"
 
-1417030227 source:c:\users\everton_schafer\dropbox\faculdade\pucrs\entretenimento digital\hips\code\source\playstate.cpp
+1417030398 source:c:\users\everton_schafer\dropbox\faculdade\pucrs\entretenimento digital\hips\code\source\playstate.cpp
 	<iostream>
 	<cmath>
 	"Game.h"

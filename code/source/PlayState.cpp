@@ -608,7 +608,7 @@ void PlayState::VerifyPunchBot(int player,int PunchDirection,cgf::Game* game)
             }
             if (win == true)
             {
-                bot[i].setVisible(true);
+                bot[i].setVisible(false);
                 // cout << "PLAYER 1 PUNSHED BOT" << i << endl;
             }
         }
