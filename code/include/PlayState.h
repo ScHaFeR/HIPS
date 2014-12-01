@@ -32,6 +32,7 @@ public:
 
     void botWalk();
     void VerifyStatues(cgf::Game* game);
+    void VerifyStatuesPlayer2(cgf::Game* game);
     void VerifyPunch(int player,int PunchDirection,cgf::Game* game);
     void VerifyPunchBot(int player,int PunchDirection,cgf::Game* game);
 

@@ -158,7 +158,6 @@ void PlayState::init()
     {
         statuesPlayer2[i] = 0;
         statuesPlayer1[i] = 0;
-
     }
 
     if (sf::Joystick::isConnected(0))
@@ -337,10 +336,7 @@ void PlayState::VerifyStatues(cgf::Game* game)
     int i = 0;
     int xP1 = player1.getPosition().x;
     int yP1 = player1.getPosition().y;
-    int xP2 = player2.getPosition().x;
-    int yP2 = player2.getPosition().y;
-    bool P1Win = true;
-    bool P2Win = true;
+    bool P1Win = false;
 
     if (xP1 >= 304 && xP1 <= 336 && yP1 >= 126 && yP1 <= 174 && statuesPlayer1[0] != 1)
     {
@@ -387,20 +383,32 @@ void PlayState::VerifyStatues(cgf::Game* game)
             dingSound.play();
         }
     }
-
+    int c = 0;
     for (i=0; i <= 4; i++)
     {
-        if (statuesPlayer1[i] != 1)
+        if (statuesPlayer1[i] == 1)
         {
-            P1Win = false;
+            c++;
         }
     }
-    if (P1Win == true)
-    {
+    if(c == 5){
         cout << "Player 1 Wins!" << endl;
         game->changeState(FinalStateP1::instance());
     }
-    if (xP2 >= 304 && xP2 <= 336 && yP2 >= 126 && yP2 <= 174 && statuesPlayer2[0] != 1)
+
+
+
+}
+
+void PlayState::VerifyStatuesPlayer2(cgf::Game* game)
+{
+ int i = 0;
+
+    int xP2 = player2.getPosition().x;
+    int yP2 = player2.getPosition().y;
+
+    bool P2Win = true;
+if (xP2 >= 304 && xP2 <= 336 && yP2 >= 126 && yP2 <= 174 && statuesPlayer2[0] != 1)
     {
         statuesPlayer2[0] = 1;
         cout << "Player 2 Touched Statues 1" << endl;
@@ -445,19 +453,22 @@ void PlayState::VerifyStatues(cgf::Game* game)
             dingSound.play();
         }
     }
+    int c = 0;
     for (i=0; i <= 4; i++)
     {
-        if (statuesPlayer2[i] != 1)
+        if (statuesPlayer2[i] == 1)
         {
-            P2Win = false;
+            c++;
         }
     }
-    if (P2Win == true)
-    {
+    if(c == 5){
         cout << "Player 2 Wins!" << endl;
         game->changeState(FinalStateP2::instance());
     }
+
+
 }
+
 
 void PlayState::VerifyPunch(int player,int PunchDirection,cgf::Game* game)
 {
@@ -990,6 +1001,7 @@ void PlayState::update(cgf::Game* game)
 
     botWalk();
     VerifyStatues(game);
+    VerifyStatuesPlayer2(game);
     centerMapOnPlayer();
     //tempo
     sf::Time elapsed1 = clock.getElapsedTime();
